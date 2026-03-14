@@ -23,10 +23,32 @@
  * @example
  *   maskAadhaar("123456781234")
  *   // => "XXXX-XXXX-1234"
- *
+ * 
  *   maskAadhaar("9876")
  *   // => "INVALID"
  */
 export function maskAadhaar(aadhaarNumber) {
-  // Your code here
+
+  if (typeof aadhaarNumber !== "string") {
+    return "INVALID";
+  }
+
+  // remove spaces
+  aadhaarNumber = aadhaarNumber.replace(/\s/g, "");
+
+  if (aadhaarNumber.length !== 12) {
+    return "INVALID";
+  }
+
+  if (!/^\d{12}$/.test(aadhaarNumber)) {
+    return "INVALID";
+  }
+
+  const lastFour = aadhaarNumber.slice(-4);
+
+  return `XXXX-XXXX-${lastFour}`;
 }
+
+
+
+maskAadhaar  ("123456781234") // 
